@@ -50,3 +50,8 @@ def block():
         if p2.life <= 0:
             print("You Win!")
             exit()
+
+def main():
+	print('This should not have happened')
+
+if __name__ == "__main__": main()

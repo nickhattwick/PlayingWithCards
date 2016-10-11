@@ -1,3 +1,23 @@
+def opturn():
+    print("Opponent's Turn")
+    p2.draw()
+    print("OP has ", len(p2.hand), " cards in hand")
+    opland()
+
+def opland():
+    x = 0
+    while x < len(p1.hand):
+        if p2.hand[x] == "l":
+            print("x: ", x)
+            y = p2.hand.pop(x)
+            p2.lands.append(y)
+            p2.mana = len(p2.lands)
+            print("OP has ", p2.mana, " lands")
+            break
+        else:
+            x+=1
+    opsummon()
+
 def opsummon():
     print("in summon phase test")
     mhand = [x for x in p2.hand if x != "l"]
@@ -23,3 +43,8 @@ def opsummon():
     else:
         whoblocks()
     plturn()
+
+def main():
+	print('This should not have happened')
+
+if __name__ == "__main__": main()

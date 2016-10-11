@@ -66,3 +66,8 @@ def whoblocks():
             else:
                 print("That's not even a thing")
                 whoblocks()
+
+def main():
+    print('This should not have happened')
+
+if __name__ == "__main__": main()
