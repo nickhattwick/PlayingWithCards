@@ -12,7 +12,7 @@ addlands(Deck)
 Deck.extend(("2","2","2","2","2","2","3","3","3","3","3","3","4","4","4","4","5","5","6"))
 
 
-class player:
+class Player:
     def __init__(self, name):
         self.name = name
         self.life = 20
@@ -29,17 +29,17 @@ class player:
         x = self.deck.pop()
         self.hand.append(x)
 
-p1 = player('P1')
-p2 = player('P2')
+p1 = Player('P1')
+p2 = Player('P2')
 
 players = (p1, p2)
 
-for p in players:
-    p.count = 0
-    shuffle(p.deck)
-    while (p.count < 7):
-        p.draw()
-        p.count += 1
+for player in players:
+    player.count = 0
+    shuffle(player.deck)
+    while (player.count < 7):
+        player.draw()
+        player.count += 1
 
 def prompt():
     choice = input("It's your turn. What will you do? \n LAND SUMMON ATTACK DONE\n")
@@ -52,7 +52,7 @@ def prompt():
     elif choice.upper() == "DONE":
         print("Turn End.\n Opponent's Turn")
         p1.blockers = list(p1.field)
-        opturn()
+        cpturn()
 
     elif choice.upper() == "QUIT":
         exit()
@@ -165,7 +165,7 @@ def block():
 def attack():
     if not p1.blockers:
         print("there's nothing there")
-        opturn()
+        cpturn()
     else:
         print("Your Attackers: ", p1.blockers)
         print("OP's Blockers: ", p2.blockers)
@@ -190,7 +190,7 @@ def secatkchoice():
     if choice.upper() == "Y":
         attack()
     elif choice.upper() == "N":
-        opturn()
+        cpturn()
     else:
         print("That's not a thing...")
         secatkchoice()
@@ -265,7 +265,7 @@ def whoblocks():
                 whoblocks()
 
 
-def opland():
+def cpland():
     x = 0
     while x < len(p1.hand):
         if p2.hand[x] == "l":
@@ -277,9 +277,9 @@ def opland():
             break
         else:
             x+=1
-    opsummon()
+    cpsummon()
 
-def opsummon():
+def cpsummon():
     print("in summon phase test")
     mhand = [x for x in p2.hand if x != "l"]
     p2.mana = len(p2.lands)
@@ -303,10 +303,10 @@ def opsummon():
         print("End of OP's turn")
     else:
         whoblocks()
-    plturn()
+    playerturn()
 
 
-def plturn():
+def playerturn():
     p1.playedland = False
     p1.draw()
     p1.mana = len(p1.lands)
@@ -317,10 +317,10 @@ def plturn():
 
     prompt()
 
-def opturn():
+def cpturn():
     print("Opponent's Turn")
     p2.draw()
     print("OP has ", len(p2.hand), " cards in hand")
-    opland()
+    cpland()
 
-plturn()
+playerturn()
