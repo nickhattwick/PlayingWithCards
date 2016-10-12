@@ -103,6 +103,7 @@ def summon():
         prompt()
 
 def spell():
+    shand = []
 
 def block():
     if not p2.blockers:
