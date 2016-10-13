@@ -16,16 +16,29 @@ class Spell(Card):
 
 
 
-d = Spell("d", 3)
+destroy = Spell("Destroy", 3):
 
-def effect():
-    print p2.field
-    target = input("Which monster would you like to destroy")
-    target = str(target)
-    try:
-        x = p2.field.index(target)
-        p2.field.pop(x)
-        print(target, " was destroyed")
-    except
+    def effect():
+        print p2.field
+        target = input("Which monster would you like to destroy?")
+        target = str(target)
+        try:
+            x = p2.field.index(target)
+            y = p2.field.pop(x)
+            p2.dpile.append(y)
+            print(target, " was destroyed")
+        except:
+            effect()
+
+powerup = Spell("PowerUp", 2):
+
+    def effect():
+        print p1.field
+        target = input("Which monster would you like to power up?")
+        target = str(target)
+        try:
+            
+
+
 
 def cpeffect():
