@@ -1,34 +1,5 @@
 from random import shuffle
-from block import block
-
-Deck = []
-def addlands(xli):
-    x = 0
-    while x <= 20:
-        xli.append ('l')
-        x += 1
-
-addlands(Deck)
-
-Deck.extend(("2","2","2","2","2","2","3","3","3","3","3","3","4","4","4","4","5","5","6"))
-
-
-class player:
-    def __init__(self, name):
-        self.name = name
-        self.life = 20
-        self.hand = []
-        self.field = []
-        self.blockers = []
-        self.lands = []
-        self.dpile = []
-        self.deck = Deck
-        self.playedland = False
-        self.mana = 0
-
-    def draw(self):
-        x = self.deck.pop()
-        self.hand.append(x)
+from player import player
 
 p1 = player('P1')
 p2 = player('P2')
@@ -41,6 +12,8 @@ for p in players:
     while (p.count < 7):
         p.draw()
         p.count += 1
+
+print(p1.hand)
 
 def prompt():
     choice = input("It's your turn. What will you do? \n LAND SUMMON ATTACK DONE\n")
@@ -103,6 +76,62 @@ def summon():
         print("That's not a card in your hand")
         prompt()
 
+def block():
+    if not p2.blockers:
+        p2.life = p2.life - int(attacker)
+        c = p1.blockers.index(attacker)
+        p1.blockers.pop(c)
+        print("OP LP: ", p2.life)
+        if p2.life <= 0:
+            print("You Win!")
+            exit()
+    elif max(p2.blockers) >= attacker:
+        blk = [x for x in p2.blockers if x >= attacker]
+        if min(blk) > attacker:
+            a = min(blk)
+            c = p1.blockers.index(attacker)
+            d = p1.field.index(attacker)
+            p1.blockers.pop(c)
+            p1.field.pop(d)
+            b = p2.blockers.index(a)
+            p2.blockers.pop(b)
+            p1.dpile.append(attacker)
+            print("Opponent blocked with ", a, ". Your ", attacker, "was destroyed.")
+        else:
+            blist = sorted(p2.blockers)
+            x = 0
+            while x < len(blist):
+                if blist[x] >= attacker:
+                    a = blist[x]
+                    b = p2.blockers.index(a)
+                    p2.blockers.pop(b)
+                    c = p1.blockers.index(attacker)
+                    d = p1.field.index(attacker)
+                    p1.blockers.pop(c)
+                    p1.field.pop(d)
+                    p1.dpile.append(attacker)
+                    print("Opponent blocked with ", a, ". Both were destroyed.")
+                    break
+                else:
+                    x = x + 1
+    elif int(attacker) > p2.life:
+        bmin = min(p2.blockers)
+        x = p2.blockers.index(bmin)
+        a = p2.field.index(bmin)
+        y = p2.field.pop(a)
+        p2.blockers.pop(x)
+        p2.dpile.append(y)
+        print("OP blocked with ", bmin)
+        print("OP's ", bmin, " was destroyed")
+
+    else:
+        p2.life = p2.life - int(attacker)
+        c = p1.blockers.index(attacker)
+        p1.blockers.pop(c)
+        print("OP LP: ", p2.life)
+        if p2.life <= 0:
+            print("You Win!")
+            exit()
 
 def attack():
     if not p1.blockers:
@@ -256,7 +285,6 @@ def plturn():
     print("Hand: ", p1.hand)
     print("Field: ", p1.field)
     print("Mana: ", p1.mana)
-
     prompt()
 
 def opturn():
