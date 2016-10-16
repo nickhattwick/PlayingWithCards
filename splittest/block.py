@@ -1,73 +1,56 @@
-def whoblocks():
-    print("Attack Phase")
-    x = 0
-    while x < len(p2.blockers):
-        print("A", p2.blockers[x], "is attacking you.")
-        if not p1.blockers:
-            p1.life = p1.life - int(p2.blockers[x])
-            p2.blockers.pop(x)
-            print("LP: ", p1.life)
-            if p1.life <= 0:
-                print("Game Over")
-                exit()
-            else:
-                x = x + 1
+def block():
+    if not p2.blockers:
+        p2.life = p2.life - int(attacker)
+        c = p1.blockers.index(attacker)
+        p1.blockers.pop(c)
+        print("OP LP: ", p2.life)
+        if p2.life <= 0:
+            print("You Win!")
+            exit()
+    elif max(p2.blockers) >= attacker:
+        blk = [x for x in p2.blockers if x >= attacker]
+        if min(blk) > attacker:
+            a = min(blk)
+            c = p1.blockers.index(attacker)
+            d = p1.field.index(attacker)
+            p1.blockers.pop(c)
+            p1.field.pop(d)
+            b = p2.blockers.index(a)
+            p2.blockers.pop(b)
+            p1.dpile.append(attacker)
+            print("Opponent blocked with ", a, ". Your ", attacker, "was destroyed.")
         else:
-            choice = input("Will you block? Y or N\n")
-            if choice.upper() == "Y":
-                print(p1.blockers)
-                y = input("Who will you block with?\n")
-                if y in p1.blockers:
-                    yi = int(y)
-                    if y > p2.blockers[x]:
-                        a = p1.blockers.index(y)
-                        p1.blockers.pop(a)
-                        z = p2.field.index(p2.blockers[x])
-                        p2.blockers.pop(x)
-                        c = p2.field.pop(z)
-                        p2.dpile.append(c)
-                        print("OP's monster was destroyed")
-                    elif p2.blockers[x] > y:
-                        a = p1.blockers.index(y)
-                        p1.blockers.pop(a)
-                        p2.blockers.pop(x)
-                        z = p1.field.index(y)
-                        c = p1.field.pop(z)
-                        p1.dpile.append(c)
-                        print("Your ", y, " was destroyed")
-                    else:
-                        z = p2.field.index(p2.blockers[x])
-                        c = p2.field.pop(z)
-                        p2.dpile.append(c)
-                        h = p1.field.index(y)
-                        j = p1.blockers.index(y)
-                        p1.blockers.pop(j)
-                        g = p1.field.pop(h)
-                        p2.blockers.pop(x)
-                        p1.dpile.append(g)
-                        print("It's a draw, both creatures were destroyed")
-                    x = x + 1
-
-                elif y in p1.field:
-                    print("You can't block with that")
-                    whoblocks()
-                else:
-                    print("That's not even a thing")
-                    whoblocks()
-            elif choice.upper() == "N":
-                p1.life = p1.life - int(p2.blockers[x])
-                print("LP: ", p1.life)
-                if p1.life <= 0:
-                    print("Game Over")
-                    exit()
+            blist = sorted(p2.blockers)
+            x = 0
+            while x < len(blist):
+                if blist[x] >= attacker:
+                    a = blist[x]
+                    b = p2.blockers.index(a)
+                    p2.blockers.pop(b)
+                    c = p1.blockers.index(attacker)
+                    d = p1.field.index(attacker)
+                    p1.blockers.pop(c)
+                    p1.field.pop(d)
+                    p1.dpile.append(attacker)
+                    print("Opponent blocked with ", a, ". Both were destroyed.")
+                    break
                 else:
                     x = x + 1
+    elif int(attacker) > p2.life:
+        bmin = min(p2.blockers)
+        x = p2.blockers.index(bmin)
+        a = p2.field.index(bmin)
+        y = p2.field.pop(a)
+        p2.blockers.pop(x)
+        p2.dpile.append(y)
+        print("OP blocked with ", bmin)
+        print("OP's ", bmin, " was destroyed")
 
-            else:
-                print("That's not even a thing")
-                whoblocks()
-
-def main():
-    print('This should not have happened')
-
-if __name__ == "__main__": main()
+    else:
+        p2.life = p2.life - int(attacker)
+        c = p1.blockers.index(attacker)
+        p1.blockers.pop(c)
+        print("OP LP: ", p2.life)
+        if p2.life <= 0:
+            print("You Win!")
+            exit()

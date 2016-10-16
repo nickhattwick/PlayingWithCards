@@ -1,3 +1,7 @@
+from rungame import opturn
+from pmoves import playland, summon
+from attack import attack
+
 def prompt():
     choice = input("It's your turn. What will you do? \n LAND SUMMON ATTACK DONE\n")
     if choice.upper() == "LAND":
@@ -10,7 +14,6 @@ def prompt():
         print("Turn End.\n Opponent's Turn")
         p1.blockers = list(p1.field)
         opturn()
-
     elif choice.upper() == "QUIT":
         exit()
 

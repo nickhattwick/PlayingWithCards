@@ -1,3 +1,9 @@
+from random import shuffle
+from opturn import *
+from prompts import prompt
+from deck import Deck
+
+
 class player:
     def __init__(self, name):
         self.name = name
@@ -15,22 +21,6 @@ class player:
         x = self.deck.pop()
         self.hand.append(x)
 
-Deck = []
-def addlands(xli):
-    x = 0
-    while x <= 20:
-        xli.append ('l')
-        x += 1
-
-addlands(Deck)
-
-Deck.extend(("2","2","2","2","2","2","3","3","3","3","3","3","4","4","4","4","5","5","6"))
-
-def main():
-	print('This should not have happened')
-
-if __name__ == "__main__": main()
-
 p1 = player('P1')
 p2 = player('P2')
 
@@ -42,3 +32,21 @@ for p in players:
     while (p.count < 7):
         p.draw()
         p.count += 1
+
+def plturn():
+    p1.playedland = False
+    p1.draw()
+    p1.mana = len(p1.lands)
+    p1.blockers = list(p1.field)
+    print("Hand: ", p1.hand)
+    print("Field: ", p1.field)
+    print("Mana: ", p1.mana)
+    prompt()
+
+def opturn():
+    print("Opponent's Turn")
+    p2.draw()
+    print("OP has ", len(p2.hand), " cards in hand")
+    opland()
+
+plturn()

@@ -1,8 +1,5 @@
-def opturn():
-    print("Opponent's Turn")
-    p2.draw()
-    print("OP has ", len(p2.hand), " cards in hand")
-    opland()
+from playerblock import whoblocks
+from rungame import plturn
 
 def opland():
     x = 0
@@ -43,8 +40,3 @@ def opsummon():
     else:
         whoblocks()
     plturn()
-
-def main():
-	print('This should not have happened')
-
-if __name__ == "__main__": main()
