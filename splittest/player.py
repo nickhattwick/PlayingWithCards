@@ -15,5 +15,9 @@ class player:
         self.mana = 0
 
     def draw(self):
-        x = self.deck.pop()
-        self.hand.append(x)
+        try:
+            x = self.deck.pop()
+            self.hand.append(x)
+        except:
+            print(self.name, " loses")
+            exit()
