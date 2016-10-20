@@ -8,4 +8,6 @@ The game I will start of working with is playable by running the gamep3.py file
 in python 3. You play "l"s as resources to summon creatures represented as
 numbers in order to attack and take your opponent's life points from 20 to 0.
 
+[For more information, click here](https://projectidkblog.wordpress.com/2016/10/18/chipy-mentorship-blog-1/)
+
 I will update as make progress.
