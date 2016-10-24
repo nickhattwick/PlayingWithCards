@@ -40,19 +40,16 @@ class Player:
             print("That card is not a land")
 
     def summon(self, card):
-        #Come back to this one, "if in hand"?
-        if card.kind == "creature":
-            if self.mana >= card.cost:
-                try:
+        if card in self.hand:
+            if card.kind == "creature":
+                if self.mana >= card.cost:
                     cardindex = self.hand.index(card)
                     movingcard = self.hand.pop(cardindex)
                     self.field.append(movingcard)
                     self.mana -= card.cost
-                except ValueError:
-                    print("That card is not in your hand")
+                else:
+                    print("Not enough mana")
             else:
-                print("Not enough mana")
+                print("You can only summon creatures")
         else:
-            print("You can only summon creatures")
-
-    
+            print("That card is not in your hand")
