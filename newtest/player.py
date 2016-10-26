@@ -29,6 +29,10 @@ class Player:
             self._lose = True
             exit()
 
+    def hand_view(self):
+        for card in self.hand:
+            print card.name
+
     def tap_for_mana(self, card):
         if card.kind == "land":
             if card.tapped == False
@@ -53,3 +57,10 @@ class Player:
                 print("You can only summon creatures")
         else:
             print("That card is not in your hand")
+
+    def attack(self, card, opponent):
+        if card in self.field:
+            if card.tapped == False:
+                card.tapped = True
+                opponent.block()
+                #IS THIS ENOUGH. MAY HAVE TO COME BACK TO THIS...

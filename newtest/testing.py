@@ -7,7 +7,6 @@ class Player:
         self._life = 20
         self.hand = []
         self.field = []
-        self.blockers = []
         self.lands = []
         self.dpile = []
         self.deck = deck
