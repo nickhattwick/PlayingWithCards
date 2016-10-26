@@ -1,4 +1,4 @@
-from deck import *
+from card import Card, deck
 from random import shuffle
 
 class Player:
@@ -10,7 +10,7 @@ class Player:
         self.blockers = []
         self.lands = []
         self.dpile = []
-        self.deck = Deck
+        self.deck = deck
         self.playedland = False
         self.mana = 0
         self.lose = False
