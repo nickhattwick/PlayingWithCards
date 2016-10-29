@@ -40,14 +40,20 @@ class Player:
         for card in self.hand:
             print card.name
 
-    def play_land(self, card):
-        if card.kind == Land:
-            if card in self.hand:
-                move_card(card, self.hand, self.field)
-            else:
-                print("That card is not in your hand")
+    def play_land(self):
+        x = 0
+        if not self.playedland:
+            while x < len(self.hand):
+                if self.hand[x].name == "land":
+                    chosenland = self.hand[x]
+                    move_card(self, chosenland, self.hand, self.lands)
+                    p1.playedland = True
+                    print("Played a land")
+                else:
+                    x+=1
+            print("No lands in hand")
         else:
-            print("That card is not a land")
+            print("You've already played a land this turn")
 
     def tap_for_mana(self, card):
         if card.kind == "land":
