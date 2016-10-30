@@ -1,9 +1,5 @@
-from mana import Mana
-
-class Player:
-    def __init__(self, name):
-        self.name = name
-        self.mana = Mana(0)
-
-Joe = Player("Joe")
-print(Joe.mana.amount)
+from random import choice
+xs = "Hi bro"
+xl = "No joe"
+z = choice(xs, xl)
+print(x)

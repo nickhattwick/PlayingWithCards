@@ -22,3 +22,8 @@ for _ in range(4):
 for _ in range(2):
     deck.append(Card('creature', "Vampire", 5, 5))
     deck.append(Card('creature', "Dragon", 6, 6))
+
+def move_card(self, card, start, end):
+    index = self.start.index(card)
+    movingcard = self.start.pop(index)
+    self.end.append(card)
