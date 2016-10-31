@@ -8,6 +8,13 @@ class Card:
         self.power = power
         self.tapped = False
 
+    def __str__(self):
+        return '{} {}'.format(self.name, self.cost)
+
+    def __repr__(self):
+        return '{}'.format(self.name)
+
+
 
 '''Creates and returns a shuffled deck of Cards.'''
 deck = []
@@ -23,7 +30,12 @@ for _ in range(2):
     deck.append(Card('creature', "Vampire", 5, 5))
     deck.append(Card('creature', "Dragon", 6, 6))
 
-def move_card(self, card, start, end):
-    index = self.start.index(card)
-    movingcard = self.start.pop(index)
-    self.end.append(card)
+def find_by_name(zone, name):
+    card = None
+    for c in zone:
+        if c.name == name:
+            card = c
+            break
+    else: # we did not break
+        print("Did not find " + name + " in the zone.")
+    return card

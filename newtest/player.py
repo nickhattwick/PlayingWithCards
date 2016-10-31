@@ -1,4 +1,4 @@
-from card import Card, deck
+from card import Card, deck, find_by_name
 from mana import Mana
 from random import shuffle
 from battle import destroy, battle
@@ -6,7 +6,7 @@ from battle import destroy, battle
 class Player:
     def __init__(self, name):
         self.name = name
-        self._life = 20
+        self.life = 20
         self.hand = []
         self.field = []
         self.lands = []
@@ -17,6 +17,9 @@ class Player:
         self.lose = False
         self.opponent = None
 
+    def __str__(self):
+        return '{} {} {} {}'.format(self.name, self.life, self.field, len(self.hand))
+
     def draw(self):
         try:
             x = self.deck.pop()
@@ -25,14 +28,15 @@ class Player:
             print(self.name, " loses")
             exit()
 
-    def move_card(self, card, start, end):
-        index = self.start.index(card)
-        movingcard = self.start.pop(index)
-        self.end.append(card)
+    def move_card(self, card, fromzone, endzone):
+        index = fromzone.index(card)
+        movingcard = fromzone.pop(index)
+        endzone.append(movingcard)
 
     def take_damage(self, damage):
-        self._life -= damage
-        if self._life <= 0:
+        self.life -= damage
+        print(self.name, self.life)
+        if self.life <= 0:
             self._lose = True
             exit()
 
@@ -41,7 +45,7 @@ class Player:
 
     def hand_view(self):
         for card in self.hand:
-            print(card.name)
+            print(card)
 
     def play_land(self):
         x = 0
@@ -49,8 +53,8 @@ class Player:
             while x < len(self.hand):
                 if self.hand[x].name == "Land":
                     chosenland = self.hand[x]
-                    self.move_card(self, chosenland, self.hand, self.lands)
-                    p1.playedland = True
+                    self.move_card(chosenland, self.hand, self.lands)
+                    self.playedland = True
                     print("Played a land")
                 else:
                     x+=1
@@ -68,12 +72,14 @@ class Player:
         else:
             print("That card is not a land")
 
-    def summon(self, card):
-        if card in self.hand:
+    def summon(self, cardname):
+        if cardname in (card.name for card in self.hand):
+            card = find_by_name(self.hand, cardname)
             if card.kind == "creature":
                 if self.mana.amount >= card.cost:
-                    self.move_card(card, self.hand, self.fiend)
+                    self.move_card(card, self.hand, self.field)
                     self.mana.amount = self.mana.amount - card.cost
+                    print(card.name, " was summoned")
                 else:
                     print("Not enough mana")
             else:
@@ -81,12 +87,13 @@ class Player:
         else:
             print("That card is not in your hand")
 
-    def attack(self, attacker):
-        if attacker in self.field:
-            if attacker.tapped == False:
-                attacker.tapped = True
-                self.opponent.block_choice(attacker)
-                #IS THIS ENOUGH. MAY HAVE TO COME BACK TO THIS...
+    def attack(self, cardname):
+        attacker = find_by_name(self.field, cardname)
+        if attacker.tapped == False:
+            attacker.tapped = True
+            print(attacker.name, " is attacking")
+            self.opponent.block_choice(attacker)
+            #IS THIS ENOUGH. MAY HAVE TO COME BACK TO THIS...
 
     def block_choice(self, attacker):
         choice = input("Will you block? Y or N")

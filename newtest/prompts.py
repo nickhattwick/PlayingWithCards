@@ -2,6 +2,7 @@ from player import Player
 
 def turn_prompt(player):
     choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
+
     if choice.upper() == "LAND":
         player.play_land()
 
@@ -24,11 +25,24 @@ def turn_prompt(player):
         player.attack(attacker)
 
     elif choice.upper() == "DONE":
-        turn_prompt(player.opponent)
+        return False
 
     elif choice.upper() == "QUIT":
         exit()
 
     else:
         print("That's not even a thing")
-        prompt()
+        turn_prompt(player)
+
+    return True
+
+def full_turn(player):
+    end_conditions = player.life <= 0 or len(player.deck) <= 0
+    if end_conditions:
+        return False
+
+    can_act = True
+    while can_act:
+        can_act = turn_prompt(player)
+
+    return True
