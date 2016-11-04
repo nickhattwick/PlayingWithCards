@@ -93,7 +93,8 @@ class Player:
             attacker.tapped = True
             print(attacker.name, " is attacking")
             self.opponent.block_choice(attacker)
-            #IS THIS ENOUGH. MAY HAVE TO COME BACK TO THIS...
+        else:
+            print("You can't attack with that")
 
     def block_choice(self, attacker):
         choice = input("Will you block? Y or N")
