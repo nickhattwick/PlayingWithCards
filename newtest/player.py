@@ -56,9 +56,9 @@ class Player:
                     self.move_card(chosenland, self.hand, self.lands)
                     self.playedland = True
                     print("Played a land")
+                    break
                 else:
                     x+=1
-            print("No lands in hand")
         else:
             print("You've already played a land this turn")
 

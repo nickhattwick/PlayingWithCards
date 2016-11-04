@@ -1,6 +1,8 @@
 from player import Player
 
 def turn_prompt(player):
+    player.playedland = False
+    print("It's", player.name, "s turn.")
     choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
 
     if choice.upper() == "LAND":
