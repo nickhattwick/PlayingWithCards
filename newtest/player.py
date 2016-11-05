@@ -89,21 +89,27 @@ class Player:
 
     def attack(self, cardname):
         attacker = find_by_name(self.field, cardname)
-        if attacker.tapped == False:
-            attacker.tapped = True
-            print(attacker.name, " is attacking")
-            self.opponent.block_choice(attacker)
-        else:
-            print("You can't attack with that")
-
-    def block_choice(self, attacker):
-        choice = input("Will you block? Y or N")
-        if choice.upper() == "Y":
-            self.block()
-        elif choice.upper() == "N":
-            self.take_damage(attacker.power)
-
+        try:
+            if attacker.tapped == False:
+                attacker.tapped = True
+                print(attacker.name, " is attacking")
+                self.opponent.block_choice(attacker)
+            else:
+                print("You can't attack with that")
+        except:
+            print("That's not on your field")
 
     def block(self, attacker, blocker):
         if blocker in self.field:
             battle(self, blocker, self.opponent, attacker)
+
+    def block_choice(self, attacker):
+        choice = input("Will you block? Y or N")
+        if choice.upper() == "Y":
+            blocker = find_by_name(self.field, choice)
+            if blocker.tapped == False:
+                blocker.tapped = True
+                print(blocker.name, " blocks ", attacker.name)
+                self.block(attacker, blocker)
+        elif choice.upper() == "N":
+            self.take_damage(attacker.power)

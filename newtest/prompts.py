@@ -1,7 +1,6 @@
 from player import Player
 
 def turn_prompt(player):
-    player.playedland = False
     print("It's", player.name, "s turn.")
     choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
 
@@ -44,6 +43,10 @@ def full_turn(player):
         return False
 
     can_act = True
+    player.playedland = False
+    player.draw()
+    for creature in player.field:
+        creature.tapped = False
     while can_act:
         can_act = turn_prompt(player)
 
