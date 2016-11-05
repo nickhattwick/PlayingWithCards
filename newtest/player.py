@@ -104,23 +104,23 @@ class Player:
             battle(self, blocker, self.opponent, attacker)
 
     def block_choice(self, attacker):
-        choice = input("Will you block? Y or N")
-        if choice.upper() == "Y":
-            whoblocks = input("Who will you block with?")
-            blocker = find_by_name(self.field, whoblocks)
-            try:
-                if blocker.tapped == False:
-                    blocker.tapped = True
-                    print(blocker.name, " blocks ", attacker.name)
-                    self.block(attacker, blocker)
+        resolved = False
+        while not resolved:
+            choice = input("Will you block? Y or N")
+            if choice.upper() == "Y":
+                whoblocks = input("Who will you block with?")
+                blocker = find_by_name(self.field, whoblocks)
+                if blocker:
+                    if blocker.tapped == False:
+                        blocker.tapped = True
+                        print(blocker.name, " blocks ", attacker.name)
+                        resolved = True
+                        self.block(attacker, blocker)
+                    else:
+                        print("You can't block with a creature that's already tapped")
                 else:
-                    print("You can't block with a creature that's already tapped")
-                    block_choice(attacker)
-            except:
-                print("That's not a creature you control")
-                block_choice(attacker)
-        elif choice.upper() == "N":
-            self.take_damage(attacker.power)
-        else:
-            print("Y or N?")
-            block_choice(attacker)
+                    print("You don't control that")
+            elif choice.upper() == "N":
+                self.take_damage(attacker.power)
+            else:
+                print("Y or N?")
