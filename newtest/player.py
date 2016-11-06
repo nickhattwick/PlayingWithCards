@@ -89,14 +89,14 @@ class Player:
 
     def attack(self, cardname):
         attacker = find_by_name(self.field, cardname)
-        try:
+        if attacker:
             if not attacker.tapped:
                 attacker.tap()
                 print(attacker.name, " is attacking")
                 self.opponent.block_choice(attacker)
             else:
                 print("You can't attack with that")
-        except:
+        else:
             print("You don't control ", cardname)
 
     def block(self, attacker, blocker):
