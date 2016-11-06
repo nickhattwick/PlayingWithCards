@@ -90,8 +90,8 @@ class Player:
     def attack(self, cardname):
         attacker = find_by_name(self.field, cardname)
         try:
-            if attacker.tapped == False:
-                attacker.tapped = True
+            if not attacker.tapped:
+                attacker.tap()
                 print(attacker.name, " is attacking")
                 self.opponent.block_choice(attacker)
             else:
@@ -122,5 +122,6 @@ class Player:
                     print("You don't control that")
             elif choice.upper() == "N":
                 self.take_damage(attacker.power)
+                resolved = True
             else:
                 print("Y or N?")

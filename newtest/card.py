@@ -14,6 +14,11 @@ class Card:
     def __repr__(self):
         return '{}'.format(self.name)
 
+    def tap(self):
+        self.tapped = True
+
+    def untap(self):
+        self.tapped = False
 
 
 '''Creates and returns a shuffled deck of Cards.'''

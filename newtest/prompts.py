@@ -2,6 +2,11 @@ from player import Player
 
 def turn_prompt(player):
     print("It's", player.name, "s turn.")
+    print(player.name, "s Hand: ", player.hand)
+    print(player.name, "s Field: ", player.field)
+    print(player.opponent.name, "s Field", player.opponent.field)
+    print(player.name, "s Life: ", player.life)
+    print(player.name, "s Mana: ", player.mana.amount)
     choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
 
     if choice.upper() == "LAND":
@@ -26,6 +31,7 @@ def turn_prompt(player):
         player.attack(attacker)
 
     elif choice.upper() == "DONE":
+        player.mana.amount = 0
         return False
 
     elif choice.upper() == "QUIT":
@@ -43,6 +49,8 @@ def full_turn(player):
         return False
 
     can_act = True
+    for land in player.lands:
+        land.untap()
     player.playedland = False
     player.draw()
     for creature in player.field:
