@@ -1,9 +1,9 @@
-from player import Player
+from player import HumanPlayer
 from prompts import full_turn
 from random import shuffle, choice
 
-p1 = Player("Player 1")
-p2 = Player("Player 2")
+p1 = HumanPlayer("Player 1")
+p2 = HumanPlayer("Player 2")
 p1.opponent = p2
 p2.opponent = p1
 

@@ -43,10 +43,6 @@ class Player:
     def shuffle(self):
         shuffle(self.deck)
 
-    def hand_view(self):
-        for card in self.hand:
-            print(card)
-
     def play_land(self):
         x = 0
         if not self.playedland:
@@ -93,35 +89,108 @@ class Player:
             if not attacker.tapped:
                 attacker.tap()
                 print(attacker.name, " is attacking")
-                self.opponent.block_choice(attacker)
+                self.opponent.will_block(attacker)
             else:
                 print("You can't attack with that")
         else:
             print("You don't control ", cardname)
 
+    
     def block(self, attacker, blocker):
         if blocker in self.field:
             battle(self, blocker, self.opponent, attacker)
 
-    def block_choice(self, attacker):
+    def will_block(self, attacker):
+        raise NotImplementedError()
+
+    def who_blocks(self, attacker):
+        raise NotImplementedError()
+
+
+
+
+
+
+
+
+    def turn_prompt(self):
+        raise NotImplementedError()
+
+
+class HumanPlayer(Player):
+    def turn_prompt(self):
+        print("It's", self.name, "s turn.")
+        print(self.name, "s Hand: ", self.hand)
+        print(self.name, "s Field: ", self.field)
+        print(self.opponent.name, "s Field", self.opponent.field)
+        print(self.name, "s Life: ", self.life)
+        print(self.name, "s Mana: ", self.mana.amount)
+        choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
+
+        if choice.upper() == "LAND":
+            self.play_land()
+
+        elif choice.upper() == "VIEW":
+            self.hand_view()
+
+        elif choice.upper() == "SUMMON":
+            choice = input("Which monster will you summon?")
+            self.summon(choice)
+
+        elif choice.upper() == "TAP":
+            for land in self.lands:
+                if not land.tapped:
+                    self.tap_for_mana(land)
+                print(self.mana.amount)
+
+
+        elif choice.upper() == "ATTACK":
+            attacker = input("Which monster will attack?")
+            self.attack(attacker)
+
+        elif choice.upper() == "DONE":
+            self.mana.amount = 0
+            return False
+
+        elif choice.upper() == "QUIT":
+            exit()
+
+        else:
+            print("That's not even a thing")
+            self.turn_prompt()
+
+        return True
+
+    def hand_view(self):
+        for card in self.hand:
+            print(card)
+
+
+    def will_block(self, attacker):
         resolved = False
         while not resolved:
             choice = input("Will you block? Y or N")
             if choice.upper() == "Y":
-                whoblocks = input("Who will you block with?")
-                blocker = find_by_name(self.field, whoblocks)
-                if blocker:
-                    if blocker.tapped == False:
-                        blocker.tapped = True
-                        print(blocker.name, " blocks ", attacker.name)
-                        resolved = True
-                        self.block(attacker, blocker)
-                    else:
-                        print("You can't block with a creature that's already tapped")
-                else:
-                    print("You don't control that")
+                resolved = True
+                self.who_blocks(self, attacker)
             elif choice.upper() == "N":
                 self.take_damage(attacker.power)
                 resolved = True
             else:
                 print("Y or N?")
+
+    def who_blocks(self, attacker):
+        resolved = False
+        while not resolved:
+            chosen = input("Who will you block with?")
+            blocker = find_by_name(self.field, chosen)
+            if blocker:
+                if blocker.tapped == False:
+                    blocker.tapped = True
+                    print(blocker.name, " blocks ", attacker.name)
+                    resolved = True
+                    self.block(attacker, blocker)
+                else:
+                    print("You can't block with a creature that's already tapped")
+            else:
+                print("You don't control that")
