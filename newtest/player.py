@@ -95,7 +95,7 @@ class Player:
         else:
             print("You don't control ", cardname)
 
-    
+
     def block(self, attacker, blocker):
         if blocker in self.field:
             battle(self, blocker, self.opponent, attacker)
@@ -105,13 +105,6 @@ class Player:
 
     def who_blocks(self, attacker):
         raise NotImplementedError()
-
-
-
-
-
-
-
 
     def turn_prompt(self):
         raise NotImplementedError()
@@ -172,7 +165,7 @@ class HumanPlayer(Player):
             choice = input("Will you block? Y or N")
             if choice.upper() == "Y":
                 resolved = True
-                self.who_blocks(self, attacker)
+                self.who_blocks(attacker)
             elif choice.upper() == "N":
                 self.take_damage(attacker.power)
                 resolved = True
