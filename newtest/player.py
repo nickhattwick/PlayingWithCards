@@ -68,6 +68,12 @@ class Player:
         else:
             print("That card is not a land")
 
+    def tap_all(self):
+        for land in self.lands:
+            if not land.tapped:
+                self.tap_for_mana(land)
+            print(self.mana.amount)
+
     def summon(self, cardname):
         if cardname in (card.name for card in self.hand):
             card = find_by_name(self.hand, cardname)
@@ -131,10 +137,7 @@ class HumanPlayer(Player):
             self.summon(choice)
 
         elif choice.upper() == "TAP":
-            for land in self.lands:
-                if not land.tapped:
-                    self.tap_for_mana(land)
-                print(self.mana.amount)
+            self.tap_all()
 
 
         elif choice.upper() == "ATTACK":
@@ -190,4 +193,5 @@ class HumanPlayer(Player):
 
 class AutoPilot(Player):
     def turn_prompt(self):
-        self.play_land
+        self.play_land()
+        self.tap_all()
