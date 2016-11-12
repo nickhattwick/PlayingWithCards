@@ -192,6 +192,30 @@ class HumanPlayer(Player):
                 print("You don't control that")
 
 class AutoPilot(Player):
+    def auto_summon(self):
+        current_card = None
+        place = 0
+        creatures = [card for card in self.hand if card.kind == "creature"]
+        while place < len(creatures):
+            choice = self.hand[place]
+            if not current_card or current_card.power < choice.power:
+                current_card = choice
+            place += 1
+        if current_card:
+            self.summon(current_card)
+
+    def all_attack(self):
+        for card in self.field:
+            attack(card)
+
+    def will_block(self, attacker):
+        self.take_damage(attacker.power)
+
     def turn_prompt(self):
+        print("AI's turn")
         self.play_land()
         self.tap_all()
+        self.auto_summon()
+        self.all_attack()
+        print("Ending AI's turn")
+        return False

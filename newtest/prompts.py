@@ -1,4 +1,4 @@
-from player import Player
+from player import HumanPlayer, AutoPilot
 
 def full_turn(player):
     end_conditions = player.life <= 0 or len(player.deck) <= 0
