@@ -187,3 +187,7 @@ class HumanPlayer(Player):
                     print("You can't block with a creature that's already tapped")
             else:
                 print("You don't control that")
+
+class AutoPilot(Player):
+    def turn_prompt(self):
+        self.play_land
