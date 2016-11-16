@@ -199,15 +199,16 @@ class AutoPilot(Player):
         creatures = [card for card in self.hand if card.kind == "creature"]
         while place < len(creatures):
             choice = self.hand[place]
+            print(choice)
             if not current_card or current_card.power < choice.power:
                 current_card = choice
             place += 1
         if current_card:
-            self.summon(current_card)
+            self.summon(current_card.name)
 
     def all_attack(self):
         for card in self.field:
-            attack(card)
+            self.attack(card.name)
 
     def will_block(self, attacker):
         self.take_damage(attacker.power)
@@ -217,9 +218,9 @@ class AutoPilot(Player):
         print(self.hand)
         self.play_land()
         self.tap_all()
+        print("AI's Mana: ", self.mana.amount)
         self.auto_summon()
         self.all_attack()
-        print("AI's Mana: ", self.mana.amount)
         self.mana.amount = 0
         print("Ending AI's turn")
         return False
