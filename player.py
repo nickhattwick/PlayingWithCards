@@ -2,6 +2,7 @@ from card import Card, deck, find_by_name
 from mana import Mana
 from random import shuffle
 from battle import destroy, battle
+from logging import game_log
 
 class Player:
     def __init__(self, name):
@@ -117,6 +118,7 @@ class Player:
 
 
 class HumanPlayer(Player):
+    @game_log
     def turn_prompt(self):
         print("It's", self.name, "s turn.")
         print(self.name, "s Hand: ", self.hand)
@@ -213,6 +215,7 @@ class AutoPilot(Player):
     def will_block(self, attacker):
         self.take_damage(attacker.power)
 
+    @game_log
     def turn_prompt(self):
         print(self.name, "s turn")
         print(self.hand)
