@@ -120,6 +120,7 @@ class HumanPlayer(Player):
     def turn_prompt(self):
         print("It's", self.name, "s turn.")
         print(self.name, "s Hand: ", self.hand)
+        print(self.opponent.name, "s Hand: ", self.opponent.hand)
         print(self.name, "s Field: ", self.field)
         print(self.opponent.name, "s Field", self.opponent.field)
         print(self.name, "s Life: ", self.life)
@@ -212,10 +213,13 @@ class AutoPilot(Player):
         self.take_damage(attacker.power)
 
     def turn_prompt(self):
-        print("AI's turn")
+        print(self.name, "s turn")
+        print(self.hand)
         self.play_land()
         self.tap_all()
         self.auto_summon()
         self.all_attack()
+        print("AI's Mana: ", self.mana.amount)
+        self.mana.amount = 0
         print("Ending AI's turn")
         return False
