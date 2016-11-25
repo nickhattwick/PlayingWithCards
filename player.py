@@ -41,9 +41,6 @@ class Player:
             self._lose = True
             exit()
 
-    def shuffle(self):
-        shuffle(self.deck)
-
     def play_land(self):
         x = 0
         if not self.playedland:
