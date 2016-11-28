@@ -1,11 +1,19 @@
+from card import Card, deck, find_by_name
+from mana import Mana
+from random import shuffle
+from battle import destroy, battle
+from logging import game_log
+
 class GameControl:
-    self.hand = []
-    self.field = []
-    self.lands = []
-    self.dpile = []
-    self.deck = deck
-    self.playedland = False
-    self.mana = Mana(0)
+
+    def __init__(self):
+        self.hand = []
+        self.field = []
+        self.lands = []
+        self.dpile = []
+        self.deck = deck
+        self.playedland = False
+        self.mana = Mana(0)
 
     def draw(self):
         try:
@@ -66,3 +74,10 @@ class GameControl:
                 print("You can only summon creatures")
         else:
             print("That card is not in your hand")
+
+    def untap_all(self):
+        for card in self.field:
+            card.untap
+        for land in self.lands:
+            land.untap
+        
