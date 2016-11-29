@@ -80,4 +80,6 @@ class GameControl:
             card.untap
         for land in self.lands:
             land.untap
-        
+
+
+board = GameControl

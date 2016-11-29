@@ -3,7 +3,7 @@ from mana import Mana
 from random import shuffle
 from battle import destroy, battle
 from logging import game_log
-from board import GameControl
+from board import board
 
 class Player:
     def __init__(self, name):
@@ -11,7 +11,7 @@ class Player:
         self.life = 20
         self.lose = False
         self.opponent = None
-        self.board = GameControl
+        self.board = board
 
     def __str__(self):
         return '{} {} {} {}'.format(self.name, self.life, self.field, len(self.hand))

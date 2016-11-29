@@ -11,7 +11,7 @@ players = (p1, p2)
 for player in players:
     shuffle(player.board.deck)
     for _ in range(7):
-        player.draw()
+        player.board.draw()
 
 coin_toss = choice([True, False])
 first = p1 if coin_toss else p2
