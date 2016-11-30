@@ -3,7 +3,7 @@ from mana import Mana
 from random import shuffle
 from battle import destroy, battle
 from logging import game_log
-from board import board
+from board import GameControl
 
 class Player:
     def __init__(self, name):
@@ -11,14 +11,36 @@ class Player:
         self.life = 20
         self.lose = False
         self.opponent = None
-        self.board = board
+        self.board = GameControl()
 
-        for attribute in board.attributes:
-            self.attribute = attribute
+        self.hand = self.board.hand
+        self.lands = self.board.lands
+        self.field = self.board.field
+        self.dpile = self.board.dpile
+        self.deck = self.board.deck
+        self.playedland = self.board.playedland
+        self.mana = self.board.mana
 
-    for function in board.functions:
-        def function(self):
-            self.board.function()
+    def draw(self):
+        self.board.draw()
+
+    def move_card(self):
+        self.board.move_card()
+
+    def play_land(self):
+        self.board.play_land()
+
+    def tap_for_mana(self):
+        self.board.tap_for_mana()
+
+    def tap_all(self):
+        self.board.tap_all()
+
+    def summon(self):
+        self.board.summon()
+
+    def untap_all(self):
+        self.board.untap_all()
 
     def __str__(self):
         return '{} {} {} {}'.format(self.name, self.life, self.field, len(self.hand))
