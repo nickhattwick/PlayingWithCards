@@ -13,6 +13,13 @@ class Player:
         self.opponent = None
         self.board = board
 
+        for attribute in board.attributes:
+            self.attribute = attribute
+
+    for function in board.functions:
+        def function(self):
+            self.board.function()
+
     def __str__(self):
         return '{} {} {} {}'.format(self.name, self.life, self.field, len(self.hand))
 

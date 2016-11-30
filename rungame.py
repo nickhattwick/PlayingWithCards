@@ -9,7 +9,7 @@ p2.opponent = p1
 
 players = (p1, p2)
 for player in players:
-    shuffle(player.board.deck)
+    shuffle(player.deck)
     for _ in range(7):
         player.board.draw()
 

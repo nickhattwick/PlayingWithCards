@@ -15,6 +15,9 @@ class GameControl:
         self.playedland = False
         self.mana = Mana(0)
 
+        self.attributes = [self.hand, self.field, self.lands, self.dpile, self.deck, self.playedland, self.mana]
+        self.functions = [self.draw, self.move_card, self.play_land, self.tap_for_mana, self.tap_all, self.summon, self.untap_all]
+
     def draw(self):
         try:
             x = self.deck.pop()
@@ -81,5 +84,4 @@ class GameControl:
         for land in self.lands:
             land.untap
 
-
-board = GameControl
+board = GameControl()
