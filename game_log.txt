@@ -63,4 +63,14 @@ Player 1s field: []
 Player 2s field: []
 Player 1s LP: 20
 Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Vampire, Bear, Bear, Knight, Land, Land, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Bear, Land, Knight, Elemental, Knight, Land, Elemental]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
 [Land]

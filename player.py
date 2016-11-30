@@ -24,19 +24,19 @@ class Player:
     def draw(self):
         self.board.draw()
 
-    def move_card(self):
-        self.board.move_card()
+    def move_card(self, card, fromzone, endzone):
+        self.board.move_card(card, fromzone, endzone)
 
     def play_land(self):
         self.board.play_land()
 
-    def tap_for_mana(self):
+    def tap_for_mana(self, card):
         self.board.tap_for_mana()
 
     def tap_all(self):
         self.board.tap_all()
 
-    def summon(self):
+    def summon(self, cardname):
         self.board.summon()
 
     def untap_all(self):
