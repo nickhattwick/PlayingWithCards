@@ -2,7 +2,6 @@ from card import Card, deck, find_by_name
 from mana import Mana
 from random import shuffle
 from battle import destroy, battle
-from logging import game_log
 from board import GameControl
 
 class Player:
@@ -13,37 +12,8 @@ class Player:
         self.opponent = None
         self.board = GameControl()
 
-        self.hand = self.board.hand
-        self.lands = self.board.lands
-        self.field = self.board.field
-        self.dpile = self.board.dpile
-        self.deck = self.board.deck
-        self.playedland = self.board.playedland
-        self.mana = self.board.mana
-
-    def draw(self):
-        self.board.draw()
-
-    def move_card(self, card, fromzone, endzone):
-        self.board.move_card(card, fromzone, endzone)
-
-    def play_land(self):
-        self.board.play_land()
-
-    def tap_for_mana(self, card):
-        self.board.tap_for_mana(card)
-
-    def tap_all(self):
-        self.board.tap_all()
-
-    def summon(self, cardname):
-        self.board.summon(cardname)
-
-    def untap_all(self):
-        self.board.untap_all()
-
     def __str__(self):
-        return '{} {} {} {}'.format(self.name, self.life, self.field, len(self.hand))
+        return '{} {} {} {}'.format(self.name, self.life, self.board.field, len(self.board.hand))
 
     def take_damage(self, damage):
         self.life -= damage
@@ -52,11 +22,8 @@ class Player:
             self._lose = True
             exit()
 
-    def turn_start(self):
-        self.board.draw
-
     def attack(self, cardname):
-        attacker = find_by_name(self.field, cardname)
+        attacker = find_by_name(self.board.field, cardname)
         if attacker:
             if not attacker.tapped:
                 attacker.tap()
@@ -69,7 +36,7 @@ class Player:
 
 
     def block(self, attacker, blocker):
-        if blocker in self.field:
+        if blocker in self.board.field:
             battle(self, blocker, self.opponent, attacker)
 
     def will_block(self, attacker):
@@ -83,34 +50,32 @@ class Player:
 
 
 class HumanPlayer(Player):
-    @game_log
     def turn_prompt(self):
         print("It's", self.name, "s turn.")
-        print(self.name, "s Hand: ", self.hand)
-        print(self.opponent.name, "s Hand: ", self.opponent.hand)
-        print(self.name, "s Field: ", self.field)
-        print(self.opponent.name, "s Field", self.opponent.field)
+        print(self.name, "s Hand: ", self.board.hand)
+        print(self.opponent.name, "s Hand: ", self.opponent.board.hand)
+        print(self.name, "s Field: ", self.board.field)
+        print(self.opponent.name, "s Field", self.opponent.board.field)
         print(self.name, "s Life: ", self.life)
-        print(self.name, "s Mana: ", self.mana.amount)
+        print(self.name, "s Mana: ", self.board.mana.amount)
         choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
 
         if choice.upper() == "LAND":
-            self.play_land()
+            self.board.play_land()
 
         elif choice.upper() == "SUMMON":
             choice = input("Which monster will you summon?")
-            self.summon(choice)
+            self.board.summon(choice)
 
         elif choice.upper() == "TAP":
-            self.tap_all()
-
+            self.board.tap_all()
 
         elif choice.upper() == "ATTACK":
             attacker = input("Which monster will attack?")
             self.attack(attacker)
 
         elif choice.upper() == "DONE":
-            self.mana.amount = 0
+            self.board.mana.amount = 0
             return False
 
         elif choice.upper() == "QUIT":
@@ -144,7 +109,7 @@ class HumanPlayer(Player):
         resolved = False
         while not resolved:
             chosen = input("Who will you block with?")
-            blocker = find_by_name(self.field, chosen)
+            blocker = find_by_name(self.board.field, chosen)
             if blocker:
                 if blocker.tapped == False:
                     blocker.tapped = True
@@ -160,35 +125,33 @@ class AutoPilot(Player):
     def auto_summon(self):
         current_card = None
         place = 0
-        creatures = [card for card in self.hand if card.kind == "creature"]
+        creatures = [card for card in self.board.hand if card.kind == "creature"]
         while place < len(creatures):
-            choice = self.hand[place]
+            choice = self.board.hand[place]
             print(choice)
             if not current_card or current_card.power < choice.power:
                 current_card = choice
             place += 1
         if current_card:
-            self.summon(current_card.name)
+            self.board.summon(current_card.name)
 
     def all_attack(self):
-        for card in self.field:
+        for card in self.board.field:
             self.attack(card.name)
 
     def will_block(self, attacker):
         self.take_damage(attacker.power)
 
-    @game_log
     def turn_prompt(self):
         print(self.name, "s turn")
-        print(self.hand)
-        print("played land?", self.playedland, self.board.playedland)
-        self.playedland = False
-        self.play_land()
-        self.tap_all()
-        print("AI's Mana: ", self.mana.amount)
+        print(self.board.hand)
+        print(self.board.playedland)
+        self.board.play_land()
+        self.board.tap_all()
+        print("AI's Mana: ", self.board.mana.amount)
         self.auto_summon()
         self.all_attack()
-        self.mana.amount = 0
-        print("played land?", self.playedland, self.board.playedland)
+        self.board.mana.amount = 0
+        print(self.board.playedland)
         print("Ending AI's turn")
         return False

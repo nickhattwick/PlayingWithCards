@@ -1,5 +1,5 @@
 def destroy(player, card):
-    player.move_card(card, player.field, player.dpile)
+    player.board.move_card(card, player.board.field, player.board.dpile)
     print(player.name, "s ", card, " was destroyed")
 
 def battle(turnplayer, turncard, defendplayer, defendcard):
