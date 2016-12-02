@@ -1,4 +1,4 @@
-from testplayer import HumanPlayer, AutoPilot
+from player import HumanPlayer, AutoPilot
 from prompts import full_turn
 from random import shuffle, choice
 
