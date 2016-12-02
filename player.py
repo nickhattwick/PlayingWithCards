@@ -129,12 +129,11 @@ class AutoPilot(Player):
         while place < len(creatures):
             choice = self.board.hand[place]
             print(choice)
-            if not current_card or current_card.power < choice.power:
-                if current_card.cost <= self.board.mana.amount:
-                    current_card = choice
+            if not current_card or if current_card.power < choice.power & current_card.cost <= self.board.mana.amount):
+                current_card = choice
+                print("current card: ", current_card)
             place += 1
         if current_card:
-            print("current card: ", current_card)
             self.board.summon(current_card.name)
 
     def all_attack(self):
