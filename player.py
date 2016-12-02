@@ -31,13 +31,13 @@ class Player:
         self.board.play_land()
 
     def tap_for_mana(self, card):
-        self.board.tap_for_mana()
+        self.board.tap_for_mana(card)
 
     def tap_all(self):
         self.board.tap_all()
 
     def summon(self, cardname):
-        self.board.summon()
+        self.board.summon(cardname)
 
     def untap_all(self):
         self.board.untap_all()
@@ -95,14 +95,14 @@ class HumanPlayer(Player):
         choice = input("It's your turn. What will you do? \n LAND TAP SUMMON ATTACK DONE\n")
 
         if choice.upper() == "LAND":
-            self.board.play_land()
+            self.play_land()
 
         elif choice.upper() == "SUMMON":
             choice = input("Which monster will you summon?")
-            self.board.summon(choice)
+            self.summon(choice)
 
         elif choice.upper() == "TAP":
-            self.board.tap_all()
+            self.tap_all()
 
 
         elif choice.upper() == "ATTACK":
@@ -110,7 +110,7 @@ class HumanPlayer(Player):
             self.attack(attacker)
 
         elif choice.upper() == "DONE":
-            self.board.mana.amount = 0
+            self.mana.amount = 0
             return False
 
         elif choice.upper() == "QUIT":

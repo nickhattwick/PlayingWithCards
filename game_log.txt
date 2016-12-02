@@ -73,4 +73,44 @@ Player 1s field: []
 Player 2s field: []
 Player 1s LP: 20
 Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Elemental, Bear, Land, Elemental, Land, Knight, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Elemental, Land, Land, Elemental, Elemental, Bear, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Land, Land, Land, Dragon, Land, Land, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Bear, Knight, Land, Bear, Land, Bear, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Knight, Bear, Knight, Bear, Land, Dragon, Dragon, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[]Called turn_promptPlayer 1s hand: [Vampire, Land, Vampire, Knight, Land, Knight, Elemental]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 1s hand: [Land, Elemental, Land, Vampire, Knight, Land, Land]
+Player 1s field: []
+Player 2s field: []
+Player 1s LP: 20
+Player 2s LP: 20
+[Land]Called turn_promptPlayer 2s hand: [Dragon, Land, Knight, Vampire, Land, Elemental, Land]
+Player 2s field: []
+Player 1s field: []
+Player 2s LP: 20
+Player 1s LP: 20
 [Land]
