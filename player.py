@@ -34,7 +34,6 @@ class Player:
         else:
             print("You don't control ", cardname)
 
-
     def block(self, attacker, blocker):
         if blocker in self.board.field:
             battle(self, blocker, self.opponent, attacker)
