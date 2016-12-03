@@ -129,9 +129,13 @@ class AutoPilot(Player):
         while place < len(creatures):
             choice = self.board.hand[place]
             print(choice)
-            if not current_card or if current_card.power < choice.power & current_card.cost <= self.board.mana.amount):
+            if not current_card:
                 current_card = choice
                 print("current card: ", current_card)
+            elif (current_card.power < choice.power) and (current_card.cost <= self.board.mana.amount):
+                current_card = choice
+                print("current card: ", current_card)
+
             place += 1
         if current_card:
             self.board.summon(current_card.name)
