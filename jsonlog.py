@@ -9,4 +9,5 @@ def results_log(func):
 
 def moves_log(func):
     def inner(self, *args, **kwargs):
-        
+        func(self, *args, **kwargs)
+        moves = {}
