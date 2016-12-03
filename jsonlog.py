@@ -3,9 +3,10 @@ import json
 def results_log(func):
     def inner(self, *args, **kwargs):
         func(self, *args, **kwargs)
-        result = {
-        "Game": None
-        "W":
-        }
-        with open("results.json", '') as r:
-            
+        game = {"W": winner.name, "L": loser.name}
+        with open("results.json", 'a') as results:
+            json.dump(game, results)
+
+def moves_log(func):
+    def inner(self, *args, **kwargs):
+        
