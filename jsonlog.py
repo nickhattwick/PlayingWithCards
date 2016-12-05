@@ -2,7 +2,10 @@ import json
 
 all_results = {}
 players = {}
-turn = 0
+
+class Turn:
+    def __init__(self, number):
+        self 
 
 def results_log(func):
     def inner(self, *args, **kwargs):
