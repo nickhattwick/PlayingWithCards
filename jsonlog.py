@@ -8,8 +8,8 @@ class Turn:
         self.name = turnplayer.name
         self.number = number
         self.moves = []
-        self.lifes = [turnplayer.name, turnplayer.life, turnplayer.opponent.name, turnplayer.opponent.life]
-        self.
+        self.lifes = [turnplayer.life, turnplayer.opponent.life]
+        self.boards = [turnplayer.board, turnplayer.opponent.board]
 
 def results_log(func):
     def inner(self, *args, **kwargs):
