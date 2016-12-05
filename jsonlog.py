@@ -4,8 +4,12 @@ all_results = {}
 players = {}
 
 class Turn:
-    def __init__(self, number):
-        self 
+    def __init__(self, turnplayer, number):
+        self.name = turnplayer.name
+        self.number = number
+        self.moves = []
+        self.lifes = [turnplayer.name, turnplayer.life, turnplayer.opponent.name, turnplayer.opponent.life]
+        self.
 
 def results_log(func):
     def inner(self, *args, **kwargs):
