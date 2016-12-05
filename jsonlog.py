@@ -1,7 +1,6 @@
 import json
 
 all_results = {}
-players = {}
 
 class Turn:
     def __init__(self, turnplayer, number):
@@ -9,7 +8,8 @@ class Turn:
         self.number = number
         self.moves = []
         self.lifes = [turnplayer.life, turnplayer.opponent.life]
-        self.boards = [turnplayer.board, turnplayer.opponent.board]
+        self.boards = [turnplayer.board.field, turnplayer.opponent.board.field]
+        self.hands = [turnplayer.board.hand, len(turnplayer.opponent.board.hand)]
 
 def results_log(func):
     def inner(self, *args, **kwargs):
