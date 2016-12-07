@@ -14,7 +14,7 @@ class Move:
 
 class Turn:
     def __init__(self, turnplayer, number):
-        self.name = turnplayer.name
+        self.player = turnplayer
         self.number = number
         self.moves = []
         self.lifes = [turnplayer.life, turnplayer.opponent.life]
@@ -27,9 +27,17 @@ def begin_turn(turnplayer, number):
 def summon_log(func, current_turn):
     def inner(self, *args, **kwargs):
         func(self, *args, **kwargs)
-        current_turn.append()
+        if cardname in current_turn.player.board.field:
+            summon = Move(summon, cardname)
+            current_turn.moves.append(summon)
 
-
+def land_log(func):
+    def inner(self, *args, **kwargs):
+        landchecker = current_turn.player.playedland
+        func(self, *args, **kwargs)
+        if current_turn.player.playedland:
+            if not landchecker:
+                
 
 
 def results_log(func):
