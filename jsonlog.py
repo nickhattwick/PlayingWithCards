@@ -28,16 +28,27 @@ def summon_log(func, current_turn):
     def inner(self, *args, **kwargs):
         func(self, *args, **kwargs)
         if cardname in current_turn.player.board.field:
-            summon = Move(summon, cardname)
+            summon = Move("Summon", cardname)
             current_turn.moves.append(summon)
 
 def land_log(func):
     def inner(self, *args, **kwargs):
-        landchecker = current_turn.player.playedland
+        landchecker = current_turn.player.board.playedland
         func(self, *args, **kwargs)
-        if current_turn.player.playedland:
+        if current_turn.player.board.playedland:
             if not landchecker:
-                
+                current_turn.moves.append("Land")
+
+def tap_log(func):
+    def inner(self, *args, **kwargs):
+        mana_before = current_turn.player.board.mana.amount
+        func(self, *args, **kwargs)
+        mana_after = current_turn.player.board.mana.amount
+        if mana_after > mana_before:
+            tap = Move("Tap", mana_after)
+            current_turn.moves.append(tap)
+
+def 
 
 
 def results_log(func):
