@@ -5,6 +5,8 @@ all_results = {}
 turn_number = 0
 global turn_number
 
+current_turn = []
+
 class Move:
     def __init__(self, kind, detail = None):
         self.kind = kind
@@ -18,6 +20,11 @@ class Turn:
         self.lifes = [turnplayer.life, turnplayer.opponent.life]
         self.boards = [turnplayer.board.field, turnplayer.opponent.board.field]
         self.hands = [turnplayer.board.hand, len(turnplayer.opponent.board.hand)]
+
+def begin_turn(turnplayer, number):
+    current_turn = Turn(turnplayer, number)
+
+def summon_log()
 
 
 
