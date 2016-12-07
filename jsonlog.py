@@ -2,6 +2,14 @@ import json
 
 all_results = {}
 
+turn_number = 0
+global turn_number
+
+class Move:
+    def __init__(self, kind, detail = None):
+        self.kind = kind
+        self.detail = detail
+
 class Turn:
     def __init__(self, turnplayer, number):
         self.name = turnplayer.name
@@ -10,6 +18,8 @@ class Turn:
         self.lifes = [turnplayer.life, turnplayer.opponent.life]
         self.boards = [turnplayer.board.field, turnplayer.opponent.board.field]
         self.hands = [turnplayer.board.hand, len(turnplayer.opponent.board.hand)]
+
+
 
 def results_log(func):
     def inner(self, *args, **kwargs):
