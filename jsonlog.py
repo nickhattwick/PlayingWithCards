@@ -24,7 +24,11 @@ class Turn:
 def begin_turn(turnplayer, number):
     current_turn = Turn(turnplayer, number)
 
-def summon_log()
+def summon_log(func, current_turn):
+    def inner(self, *args, **kwargs):
+        func(self, *args, **kwargs)
+        current_turn.append()
+
 
 
 
