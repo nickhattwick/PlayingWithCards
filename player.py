@@ -3,6 +3,7 @@ from mana import Mana
 from random import shuffle
 from battle import destroy, battle
 from board import GameControl
+from
 
 class Player:
     def __init__(self, name):
@@ -27,6 +28,7 @@ class Player:
         if attacker:
             if not attacker.tapped:
                 attacker.tap()
+                attacker.attacked = True
                 print(attacker.name, " is attacking")
                 self.opponent.will_block(attacker)
             else:

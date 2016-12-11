@@ -12,6 +12,7 @@ def full_turn(player):
     player.board.draw()
     for creature in player.board.field:
         creature.tapped = False
+        creature.attacked = False
     while can_act:
         can_act = player.turn_prompt()
 

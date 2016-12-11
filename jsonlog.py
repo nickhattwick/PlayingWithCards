@@ -48,7 +48,10 @@ def tap_log(func):
             tap = Move("Tap", mana_after)
             current_turn.moves.append(tap)
 
-def 
+def attack_log(func):
+    def inner(self, *args, **kwargs):
+        func(self, *args, **kwargs)
+        
 
 
 def results_log(func):
