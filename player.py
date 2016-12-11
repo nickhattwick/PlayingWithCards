@@ -38,7 +38,9 @@ class Player:
 
     def block(self, attacker, blocker):
         if blocker in self.board.field:
-            battle(self, blocker, self.opponent, attacker)
+            if not blocker.blocked
+                blocker.blocked = True
+                battle(self, blocker, self.opponent, attacker)
 
     def will_block(self, attacker):
         raise NotImplementedError()
