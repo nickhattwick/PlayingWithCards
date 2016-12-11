@@ -50,7 +50,24 @@ def tap_log(func):
 
 def attack_log(func):
     def inner(self, *args, **kwargs):
+        status_before = cardname.attacked
         func(self, *args, **kwargs)
+        status_after = cardname.attacked
+        if status_before == False && status_after == True:
+            attack = Move("Attack", cardname)
+            current_turn.moves.append(attack)
+
+def block_log(func):
+    def inner(self, *args, **kwargs):
+        status_before = cardname.blocked
+        func(self, *args, **kwargs)
+        status_after = cardname.blocked
+        if status_before == False && status_after == True:
+            block = Move("Block", cardname)
+            current_turn.moves.append(block)
+
+def done_log(func):
+    def inner(self, *args, **kwargs):
         
 
 
@@ -67,10 +84,3 @@ def setup_log(firstplayer, secondplayer):
 
 def turns_log(turnplayer):
     turn.player = turnplayer
-
-
-
-
-#3 dictionaries
-#game results dictionary - game#, winner, loser
-#gamemoves dictionary - player1 moves, player2 moves
