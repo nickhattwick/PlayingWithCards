@@ -68,7 +68,10 @@ def block_log(func):
 
 def done_log(func):
     def inner(self, *args, **kwargs):
-        
+        current_turn.lifes.append(current_turn.player.life, current_turn.player.opponent.life)
+        current_turn.boards.append(current_turn.player.board.field, current_turn.player.opponent.board.field)
+        current_turn.hands.append(current_turn.player.board.hand, len(current_turn.player.opponent.board.hand))
+        func(self, *args, **kwargs)
 
 
 def results_log(func):
