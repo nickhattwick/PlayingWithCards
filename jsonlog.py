@@ -46,7 +46,8 @@ def summon_log(func):
             summon_check = find_by_name(current_turn.player.board.field, cardname)
             summon = Move("Summon", cardname)
             current_turn.moves.append(summon)
-            print(((move.kind, move.detail) for move in current_turn.moves))
+            for move in current_turn.moves:
+                print(move.kind, move.detail)
         except ValueError:
             print("not summoned")
     return inner
