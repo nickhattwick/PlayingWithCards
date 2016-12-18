@@ -3,7 +3,7 @@ from mana import Mana
 from random import shuffle
 from battle import destroy, battle
 from board import GameControl
-from
+import jsonlog
 
 class Player:
     def __init__(self, name):
@@ -38,7 +38,7 @@ class Player:
 
     def block(self, attacker, blocker):
         if blocker in self.board.field:
-            if not blocker.blocked
+            if not blocker.blocked:
                 blocker.blocked = True
                 battle(self, blocker, self.opponent, attacker)
 

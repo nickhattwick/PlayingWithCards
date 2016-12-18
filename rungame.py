@@ -1,6 +1,7 @@
 from player import HumanPlayer, AutoPilot
 from prompts import full_turn
 from random import shuffle, choice
+import jsonlog
 
 p1 = HumanPlayer("Player 1")
 p2 = AutoPilot("Player 2")
@@ -17,11 +18,16 @@ coin_toss = choice([True, False])
 first = p1 if coin_toss else p2
 second = p2 if coin_toss else p1
 
+def all_turns():
+    turn_number = 1
+    while True:
+        yield first, turn_number
+        yield second, turn_number
+        turn_number += 1
+
 keep_playing = True
-while keep_playing:
-    keep_playing = full_turn(first)
-    if not keep_playing:
-        break
-    keep_playing = full_turn(second)
+for player, turn_number in all_turns():
+    jsonlog.begin_turn(player, turn_number)
+    keep_playing = full_turn(player)
     if not keep_playing:
         break

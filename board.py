@@ -3,6 +3,7 @@ from mana import Mana
 from random import shuffle
 from battle import destroy, battle
 from logging import game_log
+import jsonlog
 
 class GameControl:
 
@@ -62,7 +63,7 @@ class GameControl:
                 self.tap_for_mana(land)
             print(self.mana.amount)
 
-
+    @jsonlog.summon_log
     def summon(self, cardname):
         if cardname in (card.name for card in self.hand):
             card = find_by_name(self.hand, cardname)
