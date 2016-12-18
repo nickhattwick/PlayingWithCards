@@ -40,10 +40,11 @@ def summon_log(func):
     def inner(*args, **kwargs):
         func(*args, **kwargs)
         cardname = args[1] # get cardname argument from summon function
+        print(cardname)
         if cardname in current_turn.player.board.field:
             summon = Move("Summon", cardname)
             current_turn.moves.append(summon)
-        print("summon logged")
+            print(current_turn.moves)
     return inner
 
 def land_log(func):
@@ -55,6 +56,7 @@ def land_log(func):
             if not landchecker:
                 current_turn.moves.append("Land")
     return inner
+
 
 def tap_log(func):
     global current_turn
