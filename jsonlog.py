@@ -1,4 +1,5 @@
 import json
+from card import find_by_name
 
 all_results = {}
 
@@ -41,10 +42,13 @@ def summon_log(func):
         func(*args, **kwargs)
         cardname = args[1] # get cardname argument from summon function
         print(cardname)
-        if cardname in current_turn.player.board.field:
+        try:
+            summon_check = find_by_name(current_turn.player.board.field, cardname)
             summon = Move("Summon", cardname)
             current_turn.moves.append(summon)
-            print(current_turn.moves)
+            print(((move.kind, move.detail) for move in current_turn.moves))
+        except ValueError:
+            print("not summoned")
     return inner
 
 def land_log(func):
