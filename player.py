@@ -23,6 +23,7 @@ class Player:
             self._lose = True
             exit()
 
+    @jsonlog.attack_log
     def attack(self, cardname):
         attacker = find_by_name(self.board.field, cardname)
         if attacker:
@@ -36,6 +37,7 @@ class Player:
         else:
             print("You don't control ", cardname)
 
+    @jsonlog.block_log
     def block(self, attacker, blocker):
         if blocker in self.board.field:
             if not blocker.blocked:

@@ -32,6 +32,7 @@ class GameControl:
         movingcard = fromzone.pop(index)
         endzone.append(movingcard)
 
+    @jsonlog.land_log
     def play_land(self):
         x = 0
         if not self.playedland:
@@ -57,6 +58,7 @@ class GameControl:
         else:
             print("That card is not a land")
 
+    @jsonlog.tap_log
     def tap_all(self):
         for land in self.lands:
             if not land.tapped:

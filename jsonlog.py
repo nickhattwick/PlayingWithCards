@@ -18,6 +18,7 @@ class Move:
         self.kind = kind
         self.detail = detail
 
+
 class Turn:
     def __init__(self, turnplayer, number):
         self.player = turnplayer
@@ -54,12 +55,15 @@ def summon_log(func):
 
 def land_log(func):
     global current_turn
-    def inner(self, *args, **kwargs):
+    def inner(*args, **kwargs):
         landchecker = current_turn.player.board.playedland
         func(*args, **kwargs)
         if current_turn.player.board.playedland:
             if not landchecker:
-                current_turn.moves.append("Land")
+                land = Move("Land")
+                current_turn.moves.append(land)
+                for move in current_turn.moves:
+                    print(move.kind, move.detail)
     return inner
 
 
@@ -72,28 +76,37 @@ def tap_log(func):
         if mana_after > mana_before:
             tap = Move("Tap", mana_after)
             current_turn.moves.append(tap)
+            for move in current_turn.moves:
+                print(move.kind, move.detail)
     return inner
 
 def attack_log(func):
     global current_turn
     def inner(*args, **kwargs):
-        status_before = cardname.attacked
+        cardname = args[1]
+        card = find_by_name(current_turn.player.board.field, cardname)
+        status_before = card.attacked
         func(*args, **kwargs)
-        status_after = cardname.attacked
+        status_after = card.attacked
         if status_before == False and status_after == True:
             attack = Move("Attack", cardname)
             current_turn.moves.append(attack)
+            for move in current_turn.moves:
+                print(move.kind, move.detail)
     return inner
 
 def block_log(func):
     global current_turn
     def inner(*args, **kwargs):
-        status_before = cardname.blocked
+        blocker = args[2]
+        status_before = blocker.blocked
         func(*args, **kwargs)
-        status_after = cardname.blocked
+        status_after = blocker.blocked
         if status_before == False and status_after == True:
-            block = Move("Block", cardname)
+            block = Move("Block", blocker.name)
             current_turn.moves.append(block)
+            for move in current_turn.moves:
+                print(move.kind, move.detail)
     return inner
 
 def done_log(func):
