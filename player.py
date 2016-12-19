@@ -81,6 +81,7 @@ class HumanPlayer(Player):
 
         elif choice.upper() == "DONE":
             self.board.mana.amount = 0
+            jsonlog.end_turn()
             return False
 
         elif choice.upper() == "QUIT":
@@ -164,4 +165,5 @@ class AutoPilot(Player):
         self.board.mana.amount = 0
         print(self.board.playedland)
         print("Ending AI's turn")
+        jsonlog.end_turn()
         return False

@@ -109,16 +109,11 @@ def block_log(func):
                 print(move.kind, move.detail)
     return inner
 
-def done_log(func):
+def end_turn():
     global current_turn
-    def inner(*args, **kwargs):
-        current_turn.lifes.append(current_turn.player.life, current_turn.player.opponent.life)
-        current_turn.boards.append(current_turn.player.board.field, current_turn.player.opponent.board.field)
-        current_turn.hands.append(current_turn.player.board.hand, len(current_turn.player.opponent.board.hand))
-        func(*args, **kwargs)
-    return inner
-
-
+    global archived_turns
+    archived_turns.append(current_turn)
+    print("turn logged")
 
 def results_log(func):
     def inner(self, *args, **kwargs):
