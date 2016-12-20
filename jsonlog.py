@@ -140,10 +140,16 @@ def block_log(func):
 
 def end_turn():
     global current_turn
-    global archived_turns
+    global player_logs
     archived_turns.append(current_turn)
     print("turn logged")
 
+
+
+
+
+
+### UNNECESSARY FOR NOW
 def results_log(func):
     def inner(self, *args, **kwargs):
         func(self, *args, **kwargs)

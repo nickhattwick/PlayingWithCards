@@ -12,6 +12,7 @@ class Player:
         self.lose = False
         self.opponent = None
         self.board = GameControl()
+        
 
     def __str__(self):
         return '{} {} {} {}'.format(self.name, self.life, self.board.field, len(self.board.hand))
