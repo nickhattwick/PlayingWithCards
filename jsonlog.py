@@ -8,7 +8,7 @@ global turn_number
 
 current_turn = None
 current_game = None
-player_logs = None
+archived_turns = []
 
 # constants for Move kinds
 class MoveKind:
@@ -38,7 +38,7 @@ class Turn:
     def __repr__(self):
         return "turn {} for player {}".format(self.number, self.player)
 
-def initiate_game(players, number):
+def initiate_game(players):
     global current_game
     current_game = Game(players, 1)
 
@@ -50,8 +50,6 @@ def initiate_players(players):
 
 def initiate_turn(turnplayer, number):
     global current_turn
-    global archived_turns
-    archived_turns.append(current_turn)
     current_turn = Turn(turnplayer, number)
 
 def record_results(winner):
@@ -133,6 +131,7 @@ def block_log(func):
 
 def end_turn():
     global current_turn
+    global archived_turns
     global player_logs
     archived_turns.append(current_turn)
     print("turn logged")
