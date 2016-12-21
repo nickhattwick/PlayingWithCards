@@ -52,10 +52,10 @@ def initiate_turn(turnplayer, number):
     global current_turn
     current_turn = Turn(turnplayer, number)
 
-def record_results(winner):
+def record_results(loser):
     global current_game
-    current_game.winner = winner.name
-    current_game.loser = winner.opponent.name
+    current_game.loser = loser.name
+    current_game.winner = loser.opponent.name
 
 def summon_log(func):
     global current_turn

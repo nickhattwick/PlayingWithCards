@@ -12,7 +12,7 @@ class Player:
         self.lose = False
         self.opponent = None
         self.board = GameControl()
-        
+
 
     def __str__(self):
         return '{} {} {} {}'.format(self.name, self.life, self.board.field, len(self.board.hand))
@@ -22,6 +22,7 @@ class Player:
         print(self.name, self.life)
         if self.life <= 0:
             self._lose = True
+            jsonlog.record_results(self)
             exit()
 
     @jsonlog.attack_log
