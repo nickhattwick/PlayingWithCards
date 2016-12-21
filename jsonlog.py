@@ -67,8 +67,6 @@ def summon_log(func):
             summon_check = find_by_name(current_turn.player.board.field, cardname)
             summon = Move("Summon", cardname)
             current_turn.moves.append(summon)
-            for move in current_turn.moves:
-                print(move.kind, move.detail)
         except ValueError:
             print("not summoned")
     return inner
@@ -82,8 +80,6 @@ def land_log(func):
             if not landchecker:
                 land = Move("Land")
                 current_turn.moves.append(land)
-                for move in current_turn.moves:
-                    print(move.kind, move.detail)
     return inner
 
 
@@ -96,8 +92,6 @@ def tap_log(func):
         if mana_after > mana_before:
             tap = Move("Tap", mana_after)
             current_turn.moves.append(tap)
-            for move in current_turn.moves:
-                print(move.kind, move.detail)
     return inner
 
 def attack_log(func):
@@ -111,8 +105,6 @@ def attack_log(func):
         if status_before == False and status_after == True:
             attack = Move("Attack", cardname)
             current_turn.moves.append(attack)
-            for move in current_turn.moves:
-                print(move.kind, move.detail)
     return inner
 
 def block_log(func):
@@ -125,8 +117,6 @@ def block_log(func):
         if status_before == False and status_after == True:
             block = Move("Block", blocker.name)
             current_turn.moves.append(block)
-            for move in current_turn.moves:
-                print(move.kind, move.detail)
     return inner
 
 def end_turn():

@@ -29,7 +29,7 @@ def all_turns():
 
 keep_playing = True
 for player, turn_number in all_turns():
-    jsonlog.begin_turn(player, turn_number)
+    jsonlog.initiate_turn(player, turn_number)
     keep_playing = full_turn(player)
     if not keep_playing:
         break
