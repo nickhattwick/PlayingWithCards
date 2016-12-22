@@ -56,6 +56,7 @@ def record_results(loser):
     global current_game
     current_game.loser = loser.name
     current_game.winner = loser.opponent.name
+    print(current_game.winner, current_game.loser)
 
 def summon_log(func):
     global current_turn
@@ -127,7 +128,8 @@ def end_turn():
     print("turn logged")
     for turn in archived_turns:
         print(turn.number)
-
+        for move in turn.moves:
+            print(move.kind, move.detail)
 
 
 
