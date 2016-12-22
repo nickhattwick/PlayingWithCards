@@ -125,6 +125,10 @@ def end_turn():
     global player_logs
     archived_turns.append(current_turn)
     print("turn logged")
+    for turn in archived_turns:
+        print(turn.number)
+
+
 
 
 

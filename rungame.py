@@ -3,7 +3,7 @@ from prompts import full_turn
 from random import shuffle, choice
 import jsonlog
 
-p1 = HumanPlayer("Player 1")
+p1 = AutoPilot("Player 1")
 p2 = AutoPilot("Player 2")
 p1.opponent = p2
 p2.opponent = p1
