@@ -9,6 +9,7 @@ global turn_number
 current_turn = None
 current_game = None
 archived_turns = []
+game_log = {}
 
 # constants for Move kinds
 class MoveKind:
@@ -57,6 +58,8 @@ def record_results(loser):
     current_game.loser = loser.name
     current_game.winner = loser.opponent.name
     print(current_game.winner, current_game.loser)
+    format_logging()
+    write_to_json()
 
 def summon_log(func):
     global current_turn
@@ -133,22 +136,17 @@ def end_turn():
 
 
 
+def format_logging():
+    global game_log
+    game_log = {
+        "number" : current_game.number,
+        "turns" : {{{"turn number" : turn.number,
+                  "moves": [{move.kind : move.detail} for move in archived_turns.turn}] for turn in archived_turns},
+        "winner" : current_game.winner,
+        "loser" : current_game.loser
+}
 
-
-
-
-### UNNECESSARY FOR NOW
-def results_log(func):
-    def inner(self, *args, **kwargs):
-        func(self, *args, **kwargs)
-        this_game_results = {"W": winner.name, "L": loser.name}
-        all_results[game_id] = this_game_result
+def write_to_json():
+        global game_log
         with open("results.json".format, 'a') as results:
-            json.dump(all_results, results)
-    return inner
-
-def setup_log(firstplayer, secondplayer):
-    players.append(firstplayer.name, secondplayer.name)
-
-def turns_log(turnplayer):
-    turn.player = turnplayer
+            json.dump(game_log)
