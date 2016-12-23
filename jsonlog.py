@@ -10,6 +10,7 @@ current_turn = None
 current_game = None
 archived_turns = []
 game_log = {}
+turns_log = {}
 
 # constants for Move kinds
 class MoveKind:
@@ -58,6 +59,7 @@ def record_results(loser):
     current_game.loser = loser.name
     current_game.winner = loser.opponent.name
     print(current_game.winner, current_game.loser)
+    turn_dict
     format_logging()
     write_to_json()
 
@@ -135,13 +137,23 @@ def end_turn():
             print(move.kind, move.detail)
 
 
+def turn_dict():
+    global turns_log
+    global archived_turns
+    for turn in archived_turns:
+        turns_log["number"] = turn.number
+        turns_log["player"] = turn.player
+        move_dict = {}
+        for move in turn:
+            move_dict[move.kind] = move.detail
+        tunrs_log["moves"] = move_dict
 
 def format_logging():
     global game_log
+    global turns_log
     game_log = {
         "number" : current_game.number,
-        "turns" : {{{"turn number" : turn.number,
-                  "moves": [{move.kind : move.detail} for move in archived_turns.turn}] for turn in archived_turns},
+        "turns" : turns_log,
         "winner" : current_game.winner,
         "loser" : current_game.loser
 }
