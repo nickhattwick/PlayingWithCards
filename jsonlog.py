@@ -146,7 +146,7 @@ def turn_dict():
         move_dict = {}
         for move in turn:
             move_dict[move.kind] = move.detail
-        tunrs_log["moves"] = move_dict
+        turns_log["moves"] = move_dict
 
 def format_logging():
     global game_log
@@ -160,5 +160,5 @@ def format_logging():
 
 def write_to_json():
         global game_log
-        with open("results.json".format, 'a') as results:
-            json.dump(game_log)
+        with open("results.json", 'w') as results:
+            json.dump(game_log, results)
