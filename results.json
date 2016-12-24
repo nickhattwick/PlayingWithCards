@@ -1,1 +1,1 @@
-{"number": 1, "turns": {"number": 8, "moves": [5, "Dragon"], "player": 
+{"loser": "Player 2", "number": 1, "turns": {"number": 7, "player": "Player 2", "moves": [null, 7, "Vampire", "Dragon", "Vampire"]}, "winner": "Player 1"}

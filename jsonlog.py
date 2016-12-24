@@ -142,7 +142,7 @@ def turn_dict():
     global archived_turns
     for turn in archived_turns:
         turns_log["number"] = turn.number
-        turns_log["player"] = turn.player
+        turns_log["player"] = turn.player.name
         move_dict = {}
         move_list = []
         for move in turn.moves:
