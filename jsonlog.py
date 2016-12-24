@@ -59,7 +59,7 @@ def record_results(loser):
     current_game.loser = loser.name
     current_game.winner = loser.opponent.name
     print(current_game.winner, current_game.loser)
-    turn_dict
+    turn_dict()
     format_logging()
     write_to_json()
 
@@ -144,9 +144,11 @@ def turn_dict():
         turns_log["number"] = turn.number
         turns_log["player"] = turn.player
         move_dict = {}
-        for move in turn:
+        move_list = []
+        for move in turn.moves:
             move_dict[move.kind] = move.detail
-        turns_log["moves"] = move_dict
+            move_list.append(move_dict[move.kind])
+        turns_log["moves"] = move_list
 
 def format_logging():
     global game_log
