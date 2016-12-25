@@ -10,7 +10,7 @@ current_turn = None
 current_game = None
 archived_turns = []
 game_log = {}
-turns_log = {}
+turns_log = []
 
 # constants for Move kinds
 class MoveKind:
@@ -141,8 +141,10 @@ def turn_dict():
     global turns_log
     global archived_turns
     for turn in archived_turns:
-        turns_log["number"] = turn.number
-        turns_log["player"] = turn.player.name
+        turn_log = {}
+        turn_log["number"] = turn.number
+        turn_log["player"] = turn.player.name
+        turn_log["moves"] = []
         move_dict = {}
         move_list = []
         for move in turn.moves:
@@ -151,7 +153,8 @@ def turn_dict():
             if move.detail:
                 move_dict[move.kind].append(move.detail)
             move_list.append([move.kind, move_dict[move.kind]])
-        turns_log["moves"] = move_list
+        turn_log["moves"].append(move_list)
+    turns_log.append(turn_log)
 
 def format_logging():
     global game_log
