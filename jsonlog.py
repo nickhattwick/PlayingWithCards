@@ -146,11 +146,11 @@ def turn_dict():
         move_dict = {}
         move_list = []
         for move in turn.moves:
-            if not move_dict[move.kind]:
+            if not move.kind in move_dict:
                 move_dict[move.kind] = []
             if move.detail:
                 move_dict[move.kind].append(move.detail)
-            move_list.append(move_dict[move.kind])
+            move_list.append([move.kind, move_dict[move.kind]])
         turns_log["moves"] = move_list
 
 def format_logging():
