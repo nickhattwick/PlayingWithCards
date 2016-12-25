@@ -154,7 +154,7 @@ def turn_dict():
                 move_dict[move.kind].append(move.detail)
             move_list.append([move.kind, move_dict[move.kind]])
         turn_log["moves"].append(move_list)
-    turns_log.append(turn_log)
+        turns_log.append(turn_log)
 
 def format_logging():
     global game_log
