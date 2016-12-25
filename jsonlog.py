@@ -146,7 +146,10 @@ def turn_dict():
         move_dict = {}
         move_list = []
         for move in turn.moves:
-            move_dict[move.kind] = move.detail
+            if not move_dict[move.kind]:
+                move_dict[move.kind] = []
+            if move.detail:
+                move_dict[move.kind].append(move.detail)
             move_list.append(move_dict[move.kind])
         turns_log["moves"] = move_list
 
