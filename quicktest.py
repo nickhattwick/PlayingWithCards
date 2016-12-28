@@ -1,14 +1,3 @@
-class Thing:
-    def __init__(self, name, favorite_person):
-        self.name = name
-        self.favorite_person = favorite_person
-
-class Person:
-    def __init__(self, name, favorite_thing):
-        self.name = name
-        self.favorite_thing = favorite_thing
-
-Pail = Thing("Pail", "Joe")
-Joe = Person("Joe", "Pail")
-
-print(Joe.favorite_thing)
+ltest = [1,2,3]
+if ltest[0] == 1:
+    print("Yes siree bob")
