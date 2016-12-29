@@ -15,5 +15,5 @@ for turn_log in data["turns"]:
                 elif data["loser"] == turn_log["player"]:
                     move_ratios["Summon"][move[1]]["L"] = 1
 
-
-print(data["turns"])
+with open("parsed.json", 'w') as parsed:
+    json.dump(move_ratios, parsed)
