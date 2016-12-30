@@ -7,6 +7,7 @@ move_ratios = {"Summon" : {}}
 
 for turn_log in data["turns"]:
     for move in turn_log["moves"]:
+        print(move)
         if move[0] == "Summon":
             if move[1] not in move_ratios["Summon"]:
                 move_ratios["Summon"][move[1]] = {}
