@@ -1,3 +1,4 @@
-ltest = [1,2,3]
-if ltest[0] == 1:
-    print("Yes siree bob")
+dtest = {'joe' : 1, 'fish' : 2}
+for key in dtest:
+    if key == 'joe':
+        print(dtest['joe'])
