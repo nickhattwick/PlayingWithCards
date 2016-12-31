@@ -11,7 +11,7 @@ for turn_log in data["turns"]:
             for key in move:
                 if key == "Summon":
                     print(move)
-                    print(move["Summon"])
+                    print(move[1])
                     if move[1] not in move_ratios["Summon"]:
                         move_ratios["Summon"][move[1]] = {}
                         if data["winner"] == turn_log["player"]:
