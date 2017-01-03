@@ -12,7 +12,13 @@ for turn_log in data["turns"]:
                 if key == "Summon":
                     print(move)
                     print(move[1])
-                    if move[1] in summon_ratios:
+                    checkpoint = False
+                    while checkpoint == False
+                        for summon in summon_ratios:
+                            if summon == move
+
+
+                    if not move[1] in summon_ratios:
                         summon_ratios[move[1]] = {}
                         if data["winner"] == turn_log["player"]:
                             summon_ratios[move[1]]["W"] = 1
