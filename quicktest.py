@@ -1,4 +1,3 @@
 dtest = {'joe' : 1, 'fish' : 2}
-for key in dtest:
-    if key == 'joe':
-        print(dtest['joe'])
+dtest['mrblue'] += 1
+print (dtest['mrblue'])
