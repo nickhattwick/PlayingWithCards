@@ -17,16 +17,17 @@ for turn_log in data["turns"]:
                         for summon in summon_ratios:
                             if summon == move[1]:
                                 if data["winner"] == turn_log["player"]:
-                                    summon_ratios[move[1]]["W"] += 1
+                                    summon_ratios[move[1][0]]["W"] += 1
                                 elif data["loser"] == turn_log["player"]:
-                                    summon_ratios[move[1]]["L"] += 1
+                                    summon_ratios[move[1][0]]["L"] += 1
                                 checkpoint = True
                         if checkpoint == False:
-                            summon_ratios[move[1]] = {}
+                            summon_ratios[move[1][0]] = {}
                             if data["winner"] == turn_log["player"]:
-                                summon_ratios[move[1]]["W"] = 1
+                                summon_ratios[move[1][0]]["W"] = 1
                             elif data["loser"] == turn_log["player"]:
-                                summon_ratios[move[1]]["L"] = 1
+                                summon_ratios[move[1][0]]["L"] = 1
+                            checkpoint = True
 
 with open("parsed.json", 'w') as parsed:
-    json.dump(move_ratios, parsed)
+    json.dump(summon_ratios, parsed)

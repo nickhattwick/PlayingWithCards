@@ -1,3 +1,3 @@
-dtest = {'joe' : 1, 'fish' : 2}
-dtest['mrblue'] += 1
-print (dtest['mrblue'])
+dtest = {'joe' : 1, 'fish' : 2, 'mrblue' : ["joe", "I'm"]}
+
+print (dtest['mrblue'][1])
