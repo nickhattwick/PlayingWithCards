@@ -1,7 +1,6 @@
 from player import HumanPlayer, AutoPilot
 from prompts import full_turn
 from random import shuffle, choice
-import parsing
 import jsonlog
 
 p1 = AutoPilot("Player 1")

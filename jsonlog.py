@@ -40,9 +40,9 @@ class Turn:
     def __repr__(self):
         return "turn {} for player {}".format(self.number, self.player)
 
-def initiate_game(players):
+def initiate_game(players, number):
     global current_game
-    current_game = Game(players, 1)
+    current_game = Game(players, number)
 
 def initiate_players(players):
     for player in players:
