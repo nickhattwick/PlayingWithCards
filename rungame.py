@@ -9,7 +9,7 @@ p1.opponent = p2
 p2.opponent = p1
 
 players = (p1, p2)
-jsonlog.initiate_game(players)
+jsonlog.initiate_game(players, 1)
 
 for player in players:
     shuffle(player.board.deck)

@@ -1,3 +1,9 @@
-dtest = {'joe' : 1, 'fish' : 2, 'mrblue' : ["joe", "I'm"]}
-
-print (dtest['mrblue'][1])
+test = []
+with open("parsed.json", 'r') as joe:
+    try:
+        for key in joe:
+            test.append(joe[key])
+            print("appended")
+    except:
+        print("there's nothing there, bro")
+print(test)

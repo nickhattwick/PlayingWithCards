@@ -21,7 +21,6 @@ def all_turns():
         turn_number += 1
 
 def game_loop():
-    
     jsonlog.initiate_game(players, game_number)
     for player in players:
         shuffle(player.board.deck)
@@ -38,3 +37,7 @@ def game_loop():
         keep_playing = full_turn(player)
         if not keep_playing:
             break
+
+for _ in range 10:
+    gameloop()
+    game_number += 1
