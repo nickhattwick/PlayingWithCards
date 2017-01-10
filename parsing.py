@@ -1,8 +1,6 @@
 import json
 from collections import Counter, defaultdict
 
-summon_ratios = defaultdict(Counter)
-
 def get_victory_key(data, player):
     if data["winner"] == player:
         victory_key = 'W'
@@ -14,7 +12,20 @@ def get_victory_key(data, player):
 
 def parse_log():
     with open("results.json", 'r') as results:
-            data = json.load(results)
+        data = json.load(results)
+
+    summon_ratios = defaultdict(Counter)
+
+    try:
+        with open("parsed.json", 'r') as parsed:
+            summon_data = json.load(parsed)
+            for summon in summon_data:
+                print(summon)
+                for k, v in summon:
+                    summon_ratios[k] = v
+
+    except FileNotFoundError:
+        print("no existing file")
 
     for turn_log in data["turns"]:
         for moves in turn_log["moves"]:

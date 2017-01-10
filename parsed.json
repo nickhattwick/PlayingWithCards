@@ -1,1 +1,1 @@
-{"Land": {"W": 2}, "Dragon": {"L": 6}, "Knight": {"W": 2}, "Elemental": {"W": 1}}
+{"Elemental": {"W": 4}, "Knight": {"W": 2, "L": 2}, "Vampire": {"L": 1}, "Bear": {"L": 3}}

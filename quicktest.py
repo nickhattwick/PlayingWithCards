@@ -1,9 +1,12 @@
 import json
 
 test = []
-with open("nonexistent.json", 'r') as joe:
-    data = json.load(joe)
+try:
+    with open("nonexistent.json", 'r') as joe:
+        data = json.load(joe)
 
+except FileNotFoundError:
+    print("nada")
     try:
         for key in data:
             test.append(data[key])
