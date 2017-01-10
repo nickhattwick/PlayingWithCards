@@ -38,6 +38,4 @@ def game_loop():
         if not keep_playing:
             break
 
-for _ in range 10:
-    gameloop()
-    game_number += 1
+game_loop()
