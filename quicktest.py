@@ -1,8 +1,12 @@
+import json
+
 test = []
-with open("parsed.json", 'r') as joe:
+with open("nonexistent.json", 'r') as joe:
+    data = json.load(joe)
+
     try:
-        for key in joe:
-            test.append(joe[key])
+        for key in data:
+            test.append(data[key])
             print("appended")
     except:
         print("there's nothing there, bro")
