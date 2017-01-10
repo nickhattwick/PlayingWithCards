@@ -20,9 +20,8 @@ def parse_log():
         with open("parsed.json", 'r') as parsed:
             summon_data = json.load(parsed)
             for summon in summon_data:
-                print(summon)
-                for k, v in summon:
-                    summon_ratios[k] = v
+                print(summon, summon_data[summon])
+                summon_ratios[summon] = summon_data[summon]
 
     except FileNotFoundError:
         print("no existing file")
@@ -35,7 +34,10 @@ def parse_log():
                         summon = move[1][0]
                         player = turn_log["player"]
                         victory_key = get_victory_key(data, player)
-                        summon_ratios[summon][victory_key] += 1
+                        try:
+                            summon_ratios[summon][victory_key] += 1
+                        except KeyError:
+                            summon_ratios[summon][victory_key] = 1
 
     with open("parsed.json", 'w') as parsed:
         json.dump(summon_ratios, parsed)
