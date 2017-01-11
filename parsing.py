@@ -24,7 +24,7 @@ def parse_log():
                 summon_ratios[summon] = summon_data[summon]
 
     except FileNotFoundError:
-        print("no existing file")
+        print("Making new file")
 
     for turn_log in data["turns"]:
         for moves in turn_log["moves"]:
