@@ -1,7 +1,6 @@
 from player import HumanPlayer, AutoPilot
 from prompts import full_turn
 from random import shuffle, choice
-import parsing
 import jsonlog
 
 p1 = AutoPilot("Player 1")
@@ -10,6 +9,8 @@ p1.opponent = p2
 p2.opponent = p1
 
 players = (p1, p2)
+first = None
+second = None
 
 game_number = 1
 
@@ -33,6 +34,7 @@ def game_loop():
 
     keep_playing = True
     for player, turn_number in all_turns():
+        print(player.name, turn_number)
         jsonlog.initiate_turn(player, turn_number)
         keep_playing = full_turn(player)
         if not keep_playing:
