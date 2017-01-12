@@ -67,12 +67,13 @@ def summon_log(func):
     global current_turn
     def inner(*args, **kwargs):
         func(*args, **kwargs)
-        cardname = args[1] # get cardname argument from summon function
+        cardname = args[1]
         print(cardname)
         try:
             summon_check = find_by_name(current_turn.player.board.field, cardname)
-            summon = Move("Summon", cardname)
-            current_turn.moves.append(summon)
+            if summon_check:
+                    summon = Move("Summon", cardname)
+                    current_turn.moves.append(summon)
         except ValueError:
             print("not summoned")
     return inner
