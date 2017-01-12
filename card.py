@@ -36,11 +36,11 @@ for _ in range(2):
     deck.append(Card('creature', "Dragon", 6, 6))
 
 def find_by_name(zone, name):
-    card = None
-    for c in zone:
-        if c.name == name:
-            card = c
+    chosen_card = None
+    for card in zone:
+        if card.name == name:
+            chosen_card = card
             break
     else:
         print("Did not find " + name + " in the zone.")
-    return card
+    return chosen_card

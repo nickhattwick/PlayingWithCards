@@ -174,13 +174,13 @@ class AutoPilot(Player):
 
 
 class StillLearning(AutoPilot):
-    def get_card_value(self, summon):
+    def get_card_value(self, summon, summon_data):
             try:
-                positive_value = summon["W"]
+                positive_value = summon_data[summon]["W"]
             except KeyError:
                 positive_value = 0
             try:
-                negative_value = summon["L"]
+                negative_value = summon_data[summon]["L"]
             except KeyError:
                 negative_value = 0
             value = positive_value - negative_value
@@ -190,6 +190,7 @@ class StillLearning(AutoPilot):
         try:
             with open("parsed.json", 'r') as parsed:
                 summon_data = json.load(parsed)
+                print(summon_data)
         except FileNotFoundError:
             summon_data = None
 
@@ -208,13 +209,18 @@ class StillLearning(AutoPilot):
                     print("current card: ", current_card)
                     for summon in summon_data:
                         if summon == current_card.name:
-                            current_card_value = self.get_card_value(summon)
+                            print(summon)
+                            current_card_value = self.get_card_value(summon, summon_data)
+                    if not current_card_value:
+                        current_card_value = 0
                 else:
                     for summon in summon_data:
                         print(summon)
                         if summon == choice.name:
-                            choice_value = self.get_card_value(summon)
-                    print(choice_value, current_card_value)
+                            choice_value = self.get_card_value(summon, summon_data)
+                    if not choice_value:
+                        choice_value = 0
+                    print(choice, choice_value, current_card, current_card_value)
                     if choice_value > current_card_value:
                         current_card = choice
                         current_card_value = choice_value
