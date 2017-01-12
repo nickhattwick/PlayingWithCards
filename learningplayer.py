@@ -1,4 +1,5 @@
 from player import AutoPilot
+import json
 
 class StillLearning(AutoPilot):
     def get_card_value(summon):
@@ -28,17 +29,18 @@ class StillLearning(AutoPilot):
             choice = self.board.hand[place]
             choice_value = None
             print(choice)
-            if not current_card:
-                current_card = choice
-                print("current card: ", current_card)
-                for summon in summon_data:
-                    if summon = current_card.name:
-                        current_card_value = get_card_value(summon)
-            else:
-                for summon in summon_data:
-                    if summon = choice.name:
-                        choice_value = get_card_value(summon)
-                if choice_value > current_card_value:
+            if choice.cost <= self.board.mana.amount:
+                if not current_card:
                     current_card = choice
-                    current_card_value = choice_value
+                    print("current card: ", current_card)
+                    for summon in summon_data:
+                        if summon == current_card.name:
+                            current_card_value = get_card_value(summon)
+                else:
+                    for summon in summon_data:
+                        if summon == choice.name:
+                            choice_value = get_card_value(summon)
+                    if choice_value > current_card_value:
+                        current_card = choice
+                        current_card_value = choice_value
             place += 1

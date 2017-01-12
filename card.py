@@ -1,13 +1,11 @@
 class Card:
-    '''Represents land and creature cards.'''
-
     def __init__(self, kind, name, cost=0, power=0):
         self.kind = kind
         self.name = name
         self.cost = cost
         self.power = power
-        self.tapped = False
 
+        self.tapped = False
         self.attacked = False
         self.blocked = False
 
@@ -24,7 +22,6 @@ class Card:
         self.tapped = False
 
 
-'''Creates and returns a shuffled deck of Cards.'''
 deck = []
 for _ in range(20):
     deck.append(Card('land', "Land"))
@@ -44,6 +41,6 @@ def find_by_name(zone, name):
         if c.name == name:
             card = c
             break
-    else: # we did not break
+    else:
         print("Did not find " + name + " in the zone.")
     return card
